@@ -1,7 +1,7 @@
 fetch_logbook <- function(dummy = TRUE) {
 # get latest logbook ------------------------------------------------------
 #require(googlesheets4)
-require(tidyverse)
+library(lubridate)
 
 # De-authorize ------------------------------------------------------------
 googlesheets4::gs4_deauth()
@@ -46,7 +46,14 @@ if(dummy == TRUE) {
 # Filter variables --------------------------------------------------------
 logbook <-
   logbook %>% 
-  select(-MEL, -Remarks, -Ground)
+  select(-MEL, -Remarks, -Ground) 
+
+# Check column requirements -----------------------------------------------
+if(is.Date(logbook$Date) == FALSE) {
+  logbook <-
+    logbook %>% 
+    mutate(Date = mdy(Date))
+}
 
 return(logbook)
 }
