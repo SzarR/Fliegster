@@ -4,6 +4,7 @@ library(shiny)
 library(shinythemes)
 library(shinyalert)
 library(googlesheets4)
+library(DT)
 
 ui <-
     navbarPage(
@@ -36,12 +37,10 @@ ui <-
                     "You are also able to upload your own logbook using the
                     dialogue box below. An internal QC process will ensure your
                     logbook is consistent with the expected format.",
-                    fileInput(inputId = "task", label = "", accept = ".sav",width = 475, 
-                              placeholder = "Upload a valid SPSS file")), 
-                mainPanel(tabsetPanel(id = "task_tabs",
-                                      type = "tabs",
-                                      tabPanel("Task Results", DT::dataTableOutput("pr_task_analysis"))
-                ))
+                    fileInput(inputId = "task", label = "", accept = ".csv",width = 475, 
+                              placeholder = "Upload a valid CSV file")), 
+                mainPanel(tabsetPanel(id = "logbook_table", DT::dataTableOutput("table_logbook"))
+                )
             ) #sidebar layout
         ),
         tabPanel(title = "Quit", 

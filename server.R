@@ -3,15 +3,18 @@ library(shiny)
 
 shinyServer(function(input, output) {
 
-    output$distPlot <- renderPlot({
+# Experiment
+#values <<- reactiveValues(logbook = NULL)
+  
+# Read CSV Upon Action Button ---------------------------------------------
+  logbook <- eventReactive(input$get_logbook, {
+    fetch_logbook(dummy = TRUE)
+  })
 
-        # generate bins based on input$bins from ui.R
-        x    <- faithful[, 2]
-        bins <- seq(min(x), max(x), length.out = input$bins + 1)
-
-        # draw the histogram with the specified number of bins
-        hist(x, breaks = bins, col = 'darkgray', border = 'white')
-
+# Display table
+  output$table_logbook <-
+    DT::renderDataTable({
+      logbook()
     })
 
 })
