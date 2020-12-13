@@ -15,7 +15,7 @@ ui <-
         title = tags$strong("Fliegster"),
         selected = "Logbook Connect",
         windowTitle = "Flight Logger",
-        id = 'navbar',
+        id = 'navbar', #
         inverse = FALSE,
         theme = shinytheme("yeti"),
         tabPanel(
