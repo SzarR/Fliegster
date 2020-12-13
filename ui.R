@@ -57,7 +57,7 @@ ui <-
                          month and year. From the drop down below, please select
                          a valid year for analysis.",
                          selectInput(inputId = "YearSelect", label = h3("Select Year"), 
-                                     choices = unique(logbook_Year), 
+                                     choices = c("2019", "2020"), 
                                      selected = NULL,
                                      multiple = FALSE)),
             mainPanel(plotOutput("viz_year"))

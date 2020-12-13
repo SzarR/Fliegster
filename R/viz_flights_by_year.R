@@ -8,7 +8,7 @@ viz_flights_by_year <- function() {
   req(logbook_Year)
   
   # Run graphic code
-  viz_year <- 
+  p <- 
   logbook %>% 
     filter(lubridate::year(logbook$Date) == Year_Select) %>%
     mutate(month = month.abb[lubridate::month(Date)]) %>%
@@ -21,5 +21,5 @@ viz_flights_by_year <- function() {
     ylab("Total Logged Flight Hours") +
     theme_minimal()
     
-    return(viz_year)
+    return(p)
 }

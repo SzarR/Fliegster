@@ -4,9 +4,6 @@ fetch_logbook <- function(static=TRUE) {
 #require(googlesheets4)
 library(lubridate)
 
-# De-authorize ------------------------------------------------------------
-googlesheets4::gs4_deauth()
-
 # Set column names --------------------------------------------------------
 header_spec <-
   c(
@@ -30,8 +27,6 @@ header_spec <-
     "PIC",
     "Total"
   )
-
-# Set column types
 
 # # Fetch data --------------------------------------------------------------
 
@@ -61,9 +56,11 @@ if(is.Date(logbook$Date) == FALSE) {
 
 # Get unique years --------------------------------------------------------
 
-logbook_Year <- paste0("20", gsub(".*/","",logbook$Date))
-
-
+logbook_Year <- 
+  logbook %>% 
+  mutate(year = lubridate::year(logbook$Date)) %>% 
+  select(year) %>% 
+  pull(year) %>%  unique()
 
 return(logbook)
 }

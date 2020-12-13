@@ -1,9 +1,14 @@
 
 shinyServer(function(input, output) {
   
+
+# Reactive Values Configuration -------------------------------------------
+
+  Year_Select <- reactive({input$YearSelect})
+  
 # Read CSV Upon Action Button ---------------------------------------------
   logbook <- eventReactive(input$get_logbook, {
-    fetch_logbook(static = TRUE) #
+    fetch_logbook(static = TRUE)
   })
 
 # Display table
@@ -13,15 +18,10 @@ shinyServer(function(input, output) {
     })
   
 # Render viz_year plot
-  output$viz_year <-
-    renderPlot({
-      graph1 <- viz_flights_by_year()
+  output$viz_year <- renderPlot({
+    viz_flights_by_year()
     })
   
-  # Capture year.
-  observeEvent(input$YearSelect,
-               {
-                 Year_Select <<- input$YearSelect
-               })
+  
 
 })
