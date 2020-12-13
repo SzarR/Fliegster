@@ -3,7 +3,7 @@ shinyServer(function(input, output) {
   
 # Read CSV Upon Action Button ---------------------------------------------
   logbook <- eventReactive(input$get_logbook, {
-    fetch_logbook(static = TRUE)
+    fetch_logbook(static = TRUE) #
   })
 
 # Display table
