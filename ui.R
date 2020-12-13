@@ -19,7 +19,7 @@ ui <-
         inverse = FALSE,
         theme = shinytheme("yeti"),
         tabPanel(
-            title = "Logbook Connect",
+            title = "Logbook Connect", ##
             sidebarLayout(
                 sidebarPanel(
                     "Welcome to my logbook analytical platform. As some of you
