@@ -1,0 +1,12 @@
+name: Fliegster
+title: Fliegster
+username:
+account: szarr
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 3393915
+bundleId: 3980974
+url: https://szarr.shinyapps.io/Fliegster/
+when: 1607822282.12011
+asMultiple: FALSE
+asStatic: FALSE

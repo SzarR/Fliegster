@@ -1,5 +1,6 @@
-fetch_logbook <- function(dummy = TRUE) {
+fetch_logbook <- function(static=TRUE) {
 # get latest logbook ------------------------------------------------------
+
 #require(googlesheets4)
 library(lubridate)
 
@@ -15,32 +16,35 @@ header_spec <-
     "DEP",
     "DEST",
     "Remarks",
-    "IAPP",
-    "LDGs",
+    "IA",
+    "LDG",
     "SEL",
     "MEL",
     "XC",
     "Day",
     "Night",
     "IMC",
-    "S_IMC",
+    "SIMC",
     "Ground",
     "Dual",
     "PIC",
     "Total"
   )
 
+# Set column types
+
 # # Fetch data --------------------------------------------------------------
-# logbook_cloud <-
-# googlesheets4::read_sheet(
-#   "https://docs.google.com/spreadsheets/d/1Y40I5aJPH0zBj-gKRjlwDiTSq3zxDF3mew6G87nFdW4/edit?usp=sharing",
-#   col_names = header_spec
-# )
-if(dummy == TRUE) {
+
+if(static == TRUE) {
   logbook <-
-    readr::read_csv(file = "./data/dummy_data.csv",
-                    col_names = header_spec)
+    readr::read_csv(file = "./data/logbook_12.10.2020.csv",
+                    col_names = header_spec,
+                    col_types = cols(
+                      Date = col_date(format = "%m/%d/%y")
+                    ))
+
 } else {
+  
 }
 
 # Filter variables --------------------------------------------------------
@@ -54,6 +58,12 @@ if(is.Date(logbook$Date) == FALSE) {
     logbook %>% 
     mutate(Date = mdy(Date))
 }
+
+# Get unique years --------------------------------------------------------
+
+logbook_Year <- paste0("20", gsub(".*/","",logbook$Date))
+
+
 
 return(logbook)
 }

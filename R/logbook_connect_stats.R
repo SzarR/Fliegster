@@ -1,7 +1,7 @@
 logbook_connect_stats <- function() {
   
-
 # # Get total flight numbers ----------------------------------------------
+
 stats <-
   logbook %>% 
   summarise(`Number of Flights` = nrow(logbook),
