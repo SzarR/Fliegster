@@ -1,4 +1,4 @@
-# 
+
 # shinyServer(function(input, output) {
 # 
 # # Reactive Values Configuration -------------------------------------------
@@ -40,9 +40,18 @@ server <- function(input, output) {
     logbook <- eventReactive(input$get_logbook, {
       fetch_logbook(static = TRUE)
     })
+    
+    # Display table
+    output$table_logbook <-
+      DT::renderDataTable({
+        logbook()
+      })
   
   output$plot1 <- renderPlot({
     data <- histdata[seq_len(input$slider)]
     hist(data)
   })
+  
+  # Collapse Logbook box after clicking button
+  observeEvent(input$get_logbook,{js$collapse("datalink_panel")})
 }
